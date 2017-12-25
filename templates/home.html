@@ -1,0 +1,57 @@
+{% extends 'default.html' %}
+
+
+{% block main %}
+<div class=" row center">
+    <br>
+    <h3> Purchase a Ticket </h3>
+    <div class="row">
+        <form id="purchase-form" class="col s6 offset-s3" action="/oneway-action" method="post" >
+
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+
+                        <div class="input-field inline col s6"> Departure Date
+                            <input id="departure-date" type="date" class="validate" name="departure-date">
+                        </div>
+                        <div class="input-field inline col s6"> Departure Time
+                            <input id="departure-time" type="time" class="validate" name="departure-time">
+                        </div>
+
+                        <!--Location SElections-->
+                        <div class=" col s6">
+                            <label> From</label>
+                            <select id="from-station" class="browser-default" name="from-station">
+                                <option value="" disabled selected>Select Station</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                        </div>
+                        <div class=" col s6">
+                            <label> To</label>
+                            <select id="to-station" class="browser-default" name="to-station">
+                                <option value="" disabled selected>Select Station</option>
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <br>
+
+ <button id= "onewaybtn" class="btn waves-effect waves-light" type="submit">OK
+  </button>
+
+        </form>
+    </div>
+    </form>
+</div>
+
+</div>
+
+
+
+{% endblock %}
