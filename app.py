@@ -29,12 +29,25 @@ def search_trains():
 @app.route('/purchase', methods =['POST'])
 def purchase():
     if request.method == 'POST':
-        result_id = request.form['book_button']  # result type - still need to be defined
+        result_id = request.form['book_button']
 
-        print(result_id)
+        fname = request.form['fname'] #str
+        lname = request.form['lname'] #str
+        email = request.form['email'] #email
+        billing_addr = request.form['addr'] #str
+        credit_card = request.form['payment'] #number
 
-        #if result_id
-        #page that has the form- once form is submitted - goes to purchase act
+        insert_passenger(fname,lname,email,billing_addr,credit_card)
+
+        #insert into trips table.
+        passenger_id = get_passenger_id(email)[0]#passenger_id from passengers table.
+        insert_trips(trip_date,trip_time,trip_start,trip_end,train_id,passenger_id,fare,credit_card)
+
+        #update seats_free for each segment!
+        decrease_seats_free(train_id,trip_date,trip_start,trip_end,tickets)
+
+        return "purchase complete"
+
         return render_template('purchase.html', result = result_id)
 
 

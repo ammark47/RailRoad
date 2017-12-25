@@ -160,6 +160,7 @@ with sql.connect("rrdata.db") as con:
                     (23,23,24,6.58),
                     (24,24,25,7.05)""")
 
+def insert_stops_at():
     book = xlrd.open_workbook("stops_at_updated.xls")
     sheet = book.sheet_by_name("source")
 
@@ -182,3 +183,34 @@ with sql.connect("rrdata.db") as con:
         values = (train_id, station_id, time_in, time_out)
 
         cur.execute(query, values)
+        con.commit()
+
+insert_stops_at()
+
+def insert_seats_free():
+    book = xlrd.open_workbook("seats_free.xlsx")
+    sheet = book.sheet_by_name("source")
+
+    query = """INSERT INTO seats_free (train_id, segment_id, seat_free_date, freeseat)
+            VALUES (?,?,?,?)"""
+
+
+    for r in range(0, sheet.nrows):
+        # try:
+        train_id = int(sheet.cell(r,0).value)
+        segment_id = int(sheet.cell(r,1).value)
+
+        seat_free_date = str(xlrd.xldate.xldate_as_datetime(sheet.cell(r,2).value, book.datemode))
+
+        freeseat = sheet.cell(r,3).value
+
+        values =  (train_id, segment_id, seat_free_date, freeseat)
+        print(values)
+        cur.execute(query, values)
+        con.commit()
+        # except:
+        #     pass
+
+
+
+insert_seats_free()

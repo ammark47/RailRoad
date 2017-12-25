@@ -43,6 +43,21 @@ def get_seats_free(start_station,end_station,date,tickets):
 
     return True
 
+def decrease_seats_free(train_num,date,outgoing_station,destination_station,tickets):
+    db = sqlite3.connect('rrdata.db')
+    cursor = db.cursor()
+    if int(outgoing_station) < int(destination_station):
+        start = outgoing_station
+        end = destination_station
+    else:
+        start = destination_station
+        end = outgoing_station
+    for x in range(start,end+1):
+        print(x)
+        cursor.execute("UPDATE seats_free SET sf_free = sf_free -'{}' WHERE train_num = '{}' and sf_segment_id = '{}' "
+                       "and sf_date = '{}'".format(tickets,train_num,x,date))
+        db.commit()
+
 def get_destination_stations(outgoing_station,destination_station):
     db= sqlite3.connect('rrdata.db')
     cursor = db.cursor()
