@@ -1,0 +1,43 @@
+{% extends 'default.html' %}
+
+{% block main %}
+{% for result in results %}
+<div class="row">
+    <table>
+        <tr>
+            <td>
+
+                <div class="col s10">
+                        <ul><strong>
+                            <li>Train ID: {{result.train_id}} </li>
+                            <li>Departure Date: {{result.dep_date}}</li>
+                            <li>Departure Time: {{result.dep_time}}</li>
+                            <li>Departure Location: {{result.outgoing_station}}</li>
+                            <li>Destination: {{result.destination_station}}</li>
+                            <li>Tickets: {{result.tickets}}</li>
+                            <li>Price: ${{result.price}}</li>
+                            </strong>
+                        </ul>
+                </div>
+            </td>
+            <td>
+
+                <div class="col s2">
+                    <form id="pick-ticket1" method="post" action="/purchase">
+                        <button class="waves-effect waves-light btn" type="submit"
+                                name='book_button'  value= "{{result.train_id}}">
+                            Purchase
+                        </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<hr>
+
+
+{% endfor %}
+
+{% endblock %}

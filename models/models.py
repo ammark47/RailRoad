@@ -10,7 +10,7 @@ def get_stations():
     stations = cursor.fetchall()
     return stations
 
-def get_all_available_trains(dep_date,outgoing_station,destination_station):
+def get_available_trains(dep_date,outgoing_station,destination_station):
     direction = get_direction(int(outgoing_station),int(destination_station))
 
     db = sqlite3.connect('rrdata.db')
@@ -42,3 +42,11 @@ def get_seats_free(start_station,end_station,date,tickets):
            return False
 
     return True
+
+def get_destination_stations(outgoing_station,destination_station):
+    db= sqlite3.connect('rrdata.db')
+    cursor = db.cursor()
+    start = cursor.execute("SELECT station_name FROM stations WHERE station_id = '{}'".format(outgoing_station)).fetchone()
+    end =  cursor.execute("SELECT station_name FROM stations WHERE station_id = '{}'".format(destination_station)).fetchone()
+    result = (start[0],end[0])
+    return result

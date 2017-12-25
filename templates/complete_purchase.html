@@ -1,0 +1,42 @@
+{% extends 'default.html' %}
+
+
+{% block main %}
+<div class=" row center">
+    <br>
+    <h3> Purchase Tickets </h3>
+    <div class="row">
+        <form id="purchase-form" class="col s6 offset-s3" method="post" action="/purchase-action">
+            <div class="row">
+                <div class="input-field inline col s6"> First Name *
+                    <input name='fname' type="text">
+                </div>
+                <div class=" input-field inline col s6"> Last Name *
+                    <input name="lname" type="text">
+                </div>
+
+                <div class=" input-field inline col s12"> E-mail *
+                    <input name="email" type="email">
+                </div>
+
+                 <div class=" input-field inline col s12"> Billing Address *
+                    <input name="addr" type="text">
+                </div>
+
+                <div class=" input-field inline col s12"> Credit Card *
+                    <input name="payment" type="number">
+                </div>
+
+            </div>
+
+
+            <button  type="submit" name="action" value= {{result}}>PURCHASE
+            </button>
+
+        </form>
+    </div>
+    </form>
+</div>
+
+</div>
+{% endblock %}
