@@ -196,20 +196,20 @@ def insert_seats_free():
 
 
     for r in range(0, sheet.nrows):
-        # try:
-        train_id = int(sheet.cell(r,0).value)
-        segment_id = int(sheet.cell(r,1).value)
+        try:
+            train_id = int(sheet.cell(r,0).value)
+            segment_id = int(sheet.cell(r,1).value)
 
-        seat_free_date = str(xlrd.xldate.xldate_as_datetime(sheet.cell(r,2).value, book.datemode))
+            seat_free_date = str(xlrd.xldate.xldate_as_datetime(sheet.cell(r,2).value, book.datemode))
 
-        freeseat = sheet.cell(r,3).value
+            freeseat = sheet.cell(r,3).value
 
-        values =  (train_id, segment_id, seat_free_date, freeseat)
-        print(values)
-        cur.execute(query, values)
-        con.commit()
-        # except:
-        #     pass
+            values =  (train_id, segment_id, seat_free_date, freeseat)
+            print(values)
+            cur.execute(query, values)
+            con.commit()
+        except:
+            pass
 
 
 
